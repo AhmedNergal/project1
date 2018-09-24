@@ -3,3 +3,16 @@
 {% block title %}
 Homepage
 {% endblock %}
+
+{% block body %}
+
+    {% if username is not string  %}
+      <h3>Not logged in</h3>
+      <a href="{{ url_for('register') }}">Register</a>
+      <a href="{{ url_for('login') }}">Login</a>
+    {% else %}
+      <h3>Logged in as {{ username }}</h3>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
+
+{% endblock %}
