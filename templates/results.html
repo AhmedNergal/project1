@@ -6,10 +6,14 @@ Search Results
 
 {% block body %}
 <h1>Search Results</h1>
-<ul>
-  {% for result in results %}
-    <li><a href="#">ISBN: {{ result.isbn }}, Title: {{ result.title}}, Author, {{ result.author }}, Release Year: {{ result.year }}</a></li>
-  {% endfor %}
-</ul>
+{% if results %}
+  <ul>
+      {% for result in results %}
+        <li><a href="{{ url_for('book', book_id=result.id) }}">ISBN: {{ result.isbn }}, Title: {{ result.title}}, Author, {{ result.author }}, Release Year: {{ result.year }}</a></li>
+        {% endfor %}
+  </ul>
+{% else %}
+  <p>Results not found</p>
+{% endif %}
 
 {% endblock %}

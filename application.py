@@ -93,3 +93,11 @@ def search():
             results = db.execute("SELECT * FROM books WHERE year = :keyword", {"keyword" : keyword}).fetchall()
 
         return render_template("results.html", results=results)
+
+@app.route("/book/<int:book_id>")
+def book(book_id):
+    book = db.execute("SELECT * FROM books WHERE id = :id", {"id" : book_id}).fetchone()
+    if book is None:
+        return render_template("error.html", message="Such book doesn't exist!!!")
+    else:
+        return render_template("book.html", book=book)
