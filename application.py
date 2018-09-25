@@ -94,10 +94,37 @@ def search():
 
         return render_template("results.html", results=results)
 
+# Book Route
+
 @app.route("/book/<int:book_id>")
 def book(book_id):
     book = db.execute("SELECT * FROM books WHERE id = :id", {"id" : book_id}).fetchone()
+    reviews = db.execute("SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE book_id = :book_id", {"book_id" : book_id}).fetchall()
     if book is None:
         return render_template("error.html", message="Such book doesn't exist!!!")
     else:
-        return render_template("book.html", book=book)
+        return render_template("book.html", book=book, reviews=reviews)
+
+# Review Routes
+
+@app.route("/book/<int:book_id>/review", methods=["GET", "POST"])
+def review(book_id):
+    book = db.execute("SELECT * FROM books WHERE id = :id", {"id" : book_id}).fetchone()
+    if 'username' in session:
+        username = session['username']
+        user_id = int(db.execute("SELECT id FROM users WHERE username = :username", {"username" : username}).fetchone()[0])
+        print('The user id is: ' + str(user_id))
+        if request.method == "GET":
+            return render_template("review.html", book=book)
+        elif request.method == "POST":
+            if db.execute("SELECT * FROM reviews WHERE user_id = :user_id AND book_id = :book_id",
+                    {"user_id" : user_id, "book_id" : book_id }).rowcount != 0:
+                    return render_template("error.html", message="You reviewed this book before!!!")
+            else:
+                rating = request.form.get("rating")
+                review_title = request.form.get("review_title")
+                review_body = request.form.get("review_body")
+                db.execute("INSERT INTO reviews (user_id, book_id, rating, review_title, review_body) VALUES (:user_id, :book_id, :rating, :review_title, :review_body)",
+                            {"user_id" : user_id, "book_id" : book_id, "rating" : rating, "review_title" : review_title, "review_body" : review_body})
+                db.commit()
+                return redirect("/", code=303)

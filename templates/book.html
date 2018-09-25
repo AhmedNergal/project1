@@ -10,7 +10,13 @@
 <h3>Author: {{ book.author }}</h3>
 <h3>Publish Year: {{ book.year }}</h3>
 
+<a href="{{ url_for('review', book_id=book.id) }}">Add a review</a>
 <div class="reviews">
-  <h3>REVIEWS WILL GO HERE</h3>
+  {% for review in reviews %}
+    <h4>{{ review.username }}</h4>
+    <h5>{{ review.rating }}</h4>
+    <h2>{{ review.review_title }}</h4>
+    <p>{{ review.review_body }}</p>
+  {% endfor %}
 </div>
 {% endblock %}
