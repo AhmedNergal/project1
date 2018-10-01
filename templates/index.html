@@ -5,14 +5,20 @@ Homepage
 {% endblock %}
 
 {% block body %}
-
-    {% if username is not string  %}
-      <h3>Not logged in</h3>
-      <a href="{{ url_for('register') }}">Register</a>
-      <a href="{{ url_for('login') }}">Login</a>
-    {% else %}
-      <h3>Logged in as {{ username }}</h3>
-      <a href="{{ url_for('logout') }}">Logout</a>
-    {% endif %}
-
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Library 2.0</h1>
+      <p>Review books and watch book reviews, it's that simple!</p>
+    </div>
+    <div class="main">
+      {% if username is not string  %}
+        <h3>Please Register or Login</h3>
+        <a class="btn btn-primary" href="{{ url_for('register') }}">Register</a>
+        <a class="btn btn-primary" href="{{ url_for('login') }}">Login</a>
+      {% else %}
+        <h3>Logged in as {{ username }}</h3>
+        <a class="btn btn-danger" href="{{ url_for('logout') }}">Logout</a>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,85 @@
+body {
+  font-family: Arial;
+}
+
+.jumbotron {
+  text-align: center;
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+  p {
+    font-weight: bold;
+  }
+}
+
+.main {
+  max-width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 4rem;;
+  text-align: center;
+  h3 {
+    margin-bottom: 2rem;
+  }
+}
+
+.form-group {
+  margin: auto;
+  max-width: 50%;
+}
+
+.form-control {
+  margin: 3rem;
+}
+.custom-select {
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
+}
+
+.form-group {
+  .btn-primary {
+    width: 25%;
+    margin-left: 15rem;
+  }
+}
+
+.table {
+  margin-top: 2rem;
+}
+
+.card-text {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+#review-button {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  margin-left: 86%;
+}
+
+.review {
+  .card {
+    margin-top: 3rem;
+  }
+}
+
+.custom-control-inline{
+  margin-top: 2rem;
+  margin-left: 10%;
+  margin-bottom: 2rem;
+}
+
+#review-title {
+  margin: 0;
+}
+
+#review-body {
+  margin: 0;
+}
+
+#submit-review {
+  margin-top: 2.5rem;
+}

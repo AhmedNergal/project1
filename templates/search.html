@@ -5,16 +5,19 @@ Search
 {% endblock %}
 
 {% block body %}
-
+<h1 style="text-align: center;">Search</h1>
 <form action="{{ url_for('search') }}" method="post">
-  <input type="text" name="keyword" placeholder="keyword">
-  <select name="query">
-    <option value="isbn">ISBN</option>
-    <option value="title">Title</option>
-    <option value="author">Author</option>
-    <option value="year">Year</option>
-  </select>
-  <button>Search</button>
+  <div class="form-group">
+    <input class="form-control" type="text" name="keyword" placeholder="keyword">
+    <select class="custom-select" name="query">
+      <option value="isbn">ISBN</option>
+      <option value="title">Title</option>
+      <option value="author">Author</option>
+      <option value="year">Year</option>
+    </select>
+    <button class="btn btn-lg btn-primary">Search</button>
+  </div>
+
 </form>
 
 {% endblock %}

@@ -5,15 +5,30 @@ Search Results
 {% endblock %}
 
 {% block body %}
-<h1>Search Results</h1>
-{% if results %}
-  <ul>
-      {% for result in results %}
-        <li><a href="{{ url_for('book', book_id=result.id) }}">ISBN: {{ result.isbn }}, Title: {{ result.title}}, Author, {{ result.author }}, Release Year: {{ result.year }}</a></li>
-        {% endfor %}
-  </ul>
-{% else %}
-  <p>Results not found</p>
-{% endif %}
+<h1 style="text-align: center;">Search Results</h1>
 
+<div class="container">
+  {% if results %}
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Year</th>
+            <th scope="col">ISBN</th>
+          </tr>
+        </thead>
+        {% for result in results %}
+          <tbody>
+            <th scope="row"><a href="{{ url_for('book', book_id=result.id) }}">{{ result.title }}</a></th>
+            <td>{{ result.author }}</td>
+            <td>{{ result.year }}</td>
+            <td>{{ result.isbn }}</td>
+          </tbody>
+        {% endfor %}
+    </table>
+  {% else %}
+    <p>Results not found</p>
+  {% endif %}
+</div>
 {% endblock %}

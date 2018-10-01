@@ -1,22 +1,31 @@
 {% extends "layout.html" %}
 
 {% block title %}
-{{ book.name }}
+{{ book.title }}
 {% endblock %}
 
 {% block body %}
-<h1>Title: {{ book.title }}</h1>
-<h3>ISBN: {{ book.isbn }}</h3>
-<h3>Author: {{ book.author }}</h3>
-<h3>Publish Year: {{ book.year }}</h3>
-
-<a href="{{ url_for('review', book_id=book.id) }}">Add a review</a>
-<div class="reviews">
-  {% for review in reviews %}
-    <h4>{{ review.username }}</h4>
-    <h5>{{ review.rating }}</h4>
-    <h2>{{ review.review_title }}</h4>
-    <p>{{ review.review_body }}</p>
-  {% endfor %}
+<div class="container">
+  <div class="card">
+    <h1 class="card-header">Information about {{ book.title }}</h1>
+    <p class="card-text">Title: <strong><em>{{ book.title }}</em></strong></p>
+    <p class="card-text">ISBN: <strong><em>{{ book.isbn }}</em></strong></p>
+    <p class="card-text">Author: <strong><em>{{ book.author }}</em></strong></p>
+    <p class="card-text">Publish Year: <strong><em>{{ book.year }}</em></strong></p>
+    <p class="card-text">Goodreads Rating: <strong><em>{{ average_score }} / 5</em></strong></p>
+    <p class="card-text">Number of Reviews on Goodreads: <strong><em>{{ review_count }} reviews</em></strong></p>
+  </div>
+    <div class="reviews">
+      <a class="btn btn-lg btn-primary" id="review-button" href="{{ url_for('review', book_id=book.id) }}">Add a review</a>
+      <div class="card">
+        {% for review in reviews %}
+          <h5 class="card-header">{{ review.username }}'s Review</h5>
+          <h5 class="card-text">{{ review.username }}'s Rating: {{ review.rating }} / 5</h4>
+          <h5 class="card-text"><strong><em>{{ review.review_title }}</em></strong></h4>
+          <p class="card-text">"{{ review.review_body }}"</p>
+          <br>
+        {% endfor %}
+      </div>
+    </div>
 </div>
 {% endblock %}

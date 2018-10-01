@@ -1,9 +1,10 @@
 import os
 
-from flask import Flask, render_template, session, request, redirect
+from flask import Flask, render_template, session, request, redirect, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+import requests
 
 app = Flask(__name__)
 
@@ -100,10 +101,16 @@ def search():
 def book(book_id):
     book = db.execute("SELECT * FROM books WHERE id = :id", {"id" : book_id}).fetchone()
     reviews = db.execute("SELECT * FROM reviews JOIN users ON reviews.user_id = users.id WHERE book_id = :book_id", {"book_id" : book_id}).fetchall()
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key" : "DnUD36XqebyhLfdgeQav5Q", "isbns" : book.isbn})
+    goodreads_results = res.json()
+    average_score = goodreads_results["books"][0]["average_rating"]
+    review_count = goodreads_results["books"][0]["reviews_count"]
+    print(average_score)
+    print(review_count)
     if book is None:
         return render_template("error.html", message="Such book doesn't exist!!!")
     else:
-        return render_template("book.html", book=book, reviews=reviews)
+        return render_template("book.html", book=book, reviews=reviews, average_score=average_score, review_count=review_count)
 
 # Review Routes
 
@@ -128,3 +135,26 @@ def review(book_id):
                             {"user_id" : user_id, "book_id" : book_id, "rating" : rating, "review_title" : review_title, "review_body" : review_body})
                 db.commit()
                 return redirect("/", code=303)
+
+# ISBN API Route
+
+@app.route("/api/<string:isbn>")
+def isbn_api(isbn):
+    book = db.execute("SELECT * FROM books WHERE isbn = :isbn", {"isbn" : isbn}).fetchone()
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key" : "DnUD36XqebyhLfdgeQav5Q", "isbns" : book.isbn})
+    goodreads_results = res.json()
+    average_score = goodreads_results["books"][0]["average_rating"]
+    review_count = goodreads_results["books"][0]["reviews_count"]
+
+    if book is None:
+        return jsonify(result="error",
+                message="book not found!"), 404
+    else:
+        return jsonify(
+            title=book.title,
+            author=book.author,
+            year=book.year,
+            isbn=book.isbn,
+            review_count=review_count,
+            average_score=average_score
+        )

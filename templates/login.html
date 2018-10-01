@@ -5,11 +5,16 @@ Login
 {% endblock %}
 
 {% block body %}
+<h1 style="text-align: center;">Login</h1>
+<div class="container">
+  <form action="{{ url_for('login') }}" method="post">
+    <div class="form-group">
+      <input class="form-control" type="text" name="username" placeholder="Username">
+      <input class="form-control" type="password" name="password" placeholder="Password">
+      <button class="btn btn-lg btn-primary">Login</button>
+    </div>
+  </form>
+</div>
 
-<form action="{{ url_for('login') }}" method="post">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <button>Login</button>
-</form>
 
 {% endblock %}
