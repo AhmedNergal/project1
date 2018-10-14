@@ -6,7 +6,7 @@
 
 {% block body %}
 <div class="container">
-  <div class="card">
+  <div class="card text-white bg-dark mb-3">
     <h1 class="card-header">Information about {{ book.title }}</h1>
     <p class="card-text">Title: <strong><em>{{ book.title }}</em></strong></p>
     <p class="card-text">ISBN: <strong><em>{{ book.isbn }}</em></strong></p>
@@ -17,7 +17,7 @@
   </div>
     <div class="reviews">
       <a class="btn btn-lg btn-primary" id="review-button" href="{{ url_for('review', book_id=book.id) }}">Add a review</a>
-      <div class="card">
+      <div class="card text-white bg-dark mb-3">
         {% for review in reviews %}
           <h5 class="card-header">{{ review.username }}'s Review</h5>
           <h5 class="card-text">{{ review.username }}'s Rating: {{ review.rating }} / 5</h4>

@@ -5,12 +5,12 @@ Login
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;">Login</h1>
+<h1 class="main">Login</h1>
 <div class="container">
   <form action="{{ url_for('login') }}" method="post">
-    <div class="form-group">
-      <input class="form-control" type="text" name="username" placeholder="Username">
-      <input class="form-control" type="password" name="password" placeholder="Password">
+    <div class="form-group custom-form">
+      <input id="username" class="form-control" type="text" name="username" placeholder="Username">
+      <input id="password" class="form-control" type="password" name="password" placeholder="Password">
       <button class="btn btn-lg btn-primary">Login</button>
     </div>
   </form>

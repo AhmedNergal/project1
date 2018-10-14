@@ -5,10 +5,10 @@ Review {{ book.title }}
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;">Review {{ book.title }}</h1>
+<h1 class="main">Review {{ book.title }}</h1>
 
 <form action="{{ url_for('review', book_id=book.id) }}" method="post">
-  <div class="form-group">
+  <div class="form-group custom-form">
     <div class="custom-control custom-radio custom-control-inline">
       <input class="custom-control-input" type="radio" name="rating" value="1" id=1>
       <label class="custom-control-label" for="1" name="rating">1</label>
@@ -29,11 +29,11 @@ Review {{ book.title }}
       <input class="custom-control-input" type="radio" name="rating" value="5" id=5>
       <label class="custom-control-label" for="5" name="rating">5</label>
     </div>
-    <div class="form-group">
+    <div class="form-group review-form">
       <label for="review_title">Review Title</label>
       <input type="text" name="review_title" class="form-control" id="review-title">
     </div>
-    <div class="form-group">
+    <div class="form-group review-form">
       <label for="review_body">Review Body</label>
       <textarea name="review_body" class="form-control" rows="8" cols="80" id="review-body"></textarea>
     </div>

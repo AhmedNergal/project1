@@ -5,9 +5,9 @@ Search
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align: center;">Search</h1>
+<h1 class="main">Search</h1>
 <form action="{{ url_for('search') }}" method="post">
-  <div class="form-group">
+  <div class="form-group custom-form">
     <input class="form-control" type="text" name="keyword" placeholder="keyword">
     <select class="custom-select" name="query">
       <option value="isbn">ISBN</option>

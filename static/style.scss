@@ -1,85 +1,79 @@
 body {
-  font-family: Arial;
+  font-family: Montserrat;
+  background-color: #212529;
+  color: white;
 }
 
-.jumbotron {
+.main-header {
+  margin: 0 auto;
+  margin-top: 6rem;
+  width: 70%;
   text-align: center;
   h1 {
+    font-weight: bold;
     font-size: 3rem;
-    margin-bottom: 2rem;
   }
   p {
-    font-weight: bold;
+    font-size: 1.5rem;
   }
 }
 
 .main {
-  max-width: 75%;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 4rem;;
   text-align: center;
+  margin: 0 auto;
+  margin-top: 4rem;
+  font-weight: bold;
   h3 {
     margin-bottom: 2rem;
   }
-}
-
-.form-group {
-  margin: auto;
-  max-width: 50%;
-}
-
-.form-control {
-  margin: 3rem;
-}
-.custom-select {
-  margin-left: 3rem;
-  margin-right: 3rem;
-  margin-bottom: 3rem;
-}
-
-.form-group {
-  .btn-primary {
-    width: 25%;
-    margin-left: 15rem;
+  a {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
 }
 
-.table {
+.custom-form {
+  margin: 0 auto;
+  margin-top: 4rem;
+  width: 50%;
+  text-align: center;
+  border-radius: 2rem;
+  padding: 3rem;
+  background-color: #232323;
+  border: 2px solid white;
+  input {
+    margin-bottom: 2.5rem;
+  }
+  select {
+    margin-bottom: 2.5rem;
+  }
+  .custom-radio {
+    margin-bottom: 1rem;
+  }
+}
+
+.card {
+  margin-top: 2rem;
+  .card-text {
+    padding: 1rem;
+  }
+}
+
+.results-table {
   margin-top: 2rem;
 }
 
-.card-text {
-  padding: 0.5rem;
-  margin: 0.5rem;
+.review-form {
+  margin-bottom: 2rem;
+  label {
+    font-weight: bold;
+  }
 }
 
-#review-button {
+#error-message {
   margin-top: 3rem;
-  margin-bottom: 2rem;
-  margin-left: 86%;
-}
-
-.review {
-  .card {
-    margin-top: 3rem;
-  }
-}
-
-.custom-control-inline{
-  margin-top: 2rem;
-  margin-left: 10%;
-  margin-bottom: 2rem;
-}
-
-#review-title {
-  margin: 0;
-}
-
-#review-body {
-  margin: 0;
-}
-
-#submit-review {
-  margin-top: 2.5rem;
+  text-align: center;
+  font-style:italic;
+  font-weight: bold;
+  font-size: 1.25rem;
 }
