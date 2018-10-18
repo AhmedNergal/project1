@@ -58,7 +58,7 @@ In the search results the user can click on a books name in order to access the 
 ------------------------
 
 ### Adding a Review
-By adding the "Add a Review" button on the book's page the user will be redirected to the review page where he can leave a rating (out of 5) and a review consisting of a review title and a review body.
+By adding the "Add a Review" button on the book's page the user will be redirected to the review page where they can leave a rating (out of 5) and a review consisting of a review title and a review body.
 
 ------------------------
 
