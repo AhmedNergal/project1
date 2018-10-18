@@ -43,7 +43,7 @@ Any user has to register for an account in order to use the website, so the user
 ------------------------
 
 ### User Login
-A user must be logged in order to access any of the website's services using his registered username and password, the user can logout to end their session.
+A user must be logged in order to access any of the website's services using their registered username and password, the user can logout to end their session.
 
 ------------------------
 
