@@ -48,7 +48,7 @@ A user must be logged in order to access any of the website's services using his
 ------------------------
 
 ### Searching
-Any logged in user will be redirected to the search page where he can search for a book using its ISBN, title, author's name, or its publishing year, the results will show up in the results page in the form of a table holding all of these data (Note that the search query is case-sensitive).
+Any logged in user will be redirected to the search page where they can search for a book using its ISBN, title, author's name, or its publishing year, the results will show up in the results page in the form of a table holding all of these data (Note that the search query is case-sensitive).
 
 ------------------------
 
