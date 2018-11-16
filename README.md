@@ -43,12 +43,12 @@ Any user has to register for an account in order to use the website, so the user
 ------------------------
 
 ### User Login
-A user must be logged in order to access any of the website's services using his registered username and password, the user can logout to end their session.
+A user must be logged in order to access any of the website's services using their registered username and password, the user can logout to end their session.
 
 ------------------------
 
 ### Searching
-Any logged in user will be redirected to the search page where he can search for a book using its ISBN, title, author's name, or its publishing year, the results will show up in the results page in the form of a table holding all of these data (Note that the search query is case-sensitive).
+Any logged in user will be redirected to the search page where they can search for a book using its ISBN, title, author's name, or its publishing year, the results will show up in the results page in the form of a table holding all of these data (Note that the search query is case-sensitive).
 
 ------------------------
 
@@ -58,7 +58,7 @@ In the search results the user can click on a books name in order to access the 
 ------------------------
 
 ### Adding a Review
-By adding the "Add a Review" button on the book's page the user will be redirected to the review page where he can leave a rating (out of 5) and a review consisting of a review title and a review body.
+By adding the "Add a Review" button on the book's page the user will be redirected to the review page where they can leave a rating (out of 5) and a review consisting of a review title and a review body.
 
 ------------------------
 
