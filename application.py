@@ -161,20 +161,19 @@ def review(book_id):
 @app.route("/api/<string:isbn>")
 def isbn_api(isbn):
     book = db.execute("SELECT * FROM books WHERE isbn = :isbn", {"isbn" : isbn}).fetchone()
+    if book == None:
+        return jsonify(result="error",
+            message="book not found!"), 404
+
     res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key" : "DnUD36XqebyhLfdgeQav5Q", "isbns" : book.isbn})
     goodreads_results = res.json()
     average_score = goodreads_results["books"][0]["average_rating"]
     review_count = goodreads_results["books"][0]["reviews_count"]
-
-    if book is None:
-        return jsonify(result="error",
-                message="book not found!"), 404
-    else:
-        return jsonify(
-            title=book.title,
-            author=book.author,
-            year=book.year,
-            isbn=book.isbn,
-            review_count=review_count,
-            average_score=average_score
-        )
+    return jsonify(
+        title=book.title,
+        author=book.author,
+        year=book.year,
+        isbn=book.isbn,
+        review_count=review_count,
+        average_score=average_score
+    )
