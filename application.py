@@ -2,11 +2,13 @@ import os
 
 from flask import Flask, render_template, session, request, redirect, jsonify
 from flask_session import Session
+from flask_bcrypt import Bcrypt
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -25,7 +27,6 @@ db = scoped_session(sessionmaker(bind=engine))
 
 @app.route("/")
 def index():
-    print(session)
     if 'username' in session:
         username = session['username']
         return render_template("index.html", username=username)
@@ -42,9 +43,10 @@ def register():
         elif request.method == "POST":
             username = request.form.get("username")
             password = request.form.get("password")
+            password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
             try:
-                db.execute("INSERT INTO users (username, password) VALUES (:username, :password)",
-                        {"username" : username, "password" : password})
+                db.execute("INSERT INTO users (username, password_hash) VALUES (:username, :password_hash)",
+                        {"username" : username, "password_hash" : password_hash})
                 db.commit()
                 return redirect("/search", code=303)
 
@@ -63,11 +65,17 @@ def login():
         elif request.method == "POST":
             username = request.form.get("username")
             password = request.form.get("password")
-            if db.execute("SELECT * FROM users WHERE username = :username AND password = :password", {"username" : username, "password" : password}).rowcount != 0:
+
+            user = db.execute("SELECT * FROM users WHERE username = :username", {"username":username}).fetchone()
+            if user == None:
+                return render_template("error.html", message="Incorrect username!!")
+            database_password_hash = user[2]
+            check_password = bcrypt.check_password_hash(database_password_hash, password)
+            if check_password == True:
                 session['username'] = username
                 return redirect("/search", code=303)
             else:
-                return render_template("error.html", message="Incorrect username or password!!")
+                return render_template("error.html", message="Incorrect password!!")
     else:
         return redirect("/", code=303)
 
@@ -115,8 +123,6 @@ def book(book_id):
         goodreads_results = res.json()
         average_score = goodreads_results["books"][0]["average_rating"]
         review_count = goodreads_results["books"][0]["reviews_count"]
-        print(average_score)
-        print(review_count)
         if book is None:
             return render_template("error.html", message="Such book doesn't exist!!!")
         else:
@@ -133,7 +139,6 @@ def review(book_id):
     if 'username' in session:
         username = session['username']
         user_id = int(db.execute("SELECT id FROM users WHERE username = :username", {"username" : username}).fetchone()[0])
-        print('The user id is: ' + str(user_id))
         if request.method == "GET":
             return render_template("review.html", book=book, username=username)
         elif request.method == "POST":
